@@ -1,6 +1,10 @@
 package ait.chat.server.task;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
+import java.security.spec.ECField;
 import java.util.concurrent.BlockingQueue;
 
 public class ChatServerReceiver implements Runnable{
@@ -14,6 +18,14 @@ public class ChatServerReceiver implements Runnable{
 
     @Override
     public void run() {
-        // TODO Homework
+        try {
+            BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            String message;
+            while ((message = socketReader.readLine()) != null) {
+                messageBox.put(message);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
