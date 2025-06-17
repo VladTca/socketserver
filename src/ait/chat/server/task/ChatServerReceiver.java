@@ -30,5 +30,12 @@ public class ChatServerReceiver implements Runnable{
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
